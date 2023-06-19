@@ -17,16 +17,21 @@ import platform
 # I think this will print "hello! Let's get started" by calling the print function.
 print("hello! Let's get started")  # it printed "hello! Let's get started"
 
+# I think this creates a list from within "some_words"
 some_words = ["what", "does", "this", "line", "do", "?"]
 
+# I think this prints "word" since its exists in "some_words"
 for word in some_words:
     print(word)
 
+# I think this doesn't print anything since x isnt in "some_words"
 for x in some_words:
     print(x)
 
+# this just prints the list set to "some_words"
 print(some_words)
 
+# i think this will print the words in the list "some_words" which contain more than 3 letters"
 if len(some_words) > 3:
     print("some_words contains more than 3 words")
 
