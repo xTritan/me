@@ -6,6 +6,24 @@ Steps on the way to making your own guessing game.
 import random
 
 
+def super_asker(low, high, message):
+    """Robust asking function.
+
+    Combine what you learnt from stubborn_asker and not_number_rejector
+    to make a function that does it all!
+    """
+
+    while True:
+        my_input = input(message)
+        try:
+            val = int(my_input)
+            if low < val < high:
+                print("correct")
+                return val
+        except ValueError:
+            print("incorrect try again:")
+
+
 def advancedGuessingGame():
     """Play a guessing game with a user.
 
@@ -29,6 +47,30 @@ def advancedGuessingGame():
     purpose if you can!
     """
 
+    print("\nWelcome to the guessing game!")
+    lowerBound = super_asker(-5000, 5000, "Enter a lower bound: ")
+    upperBound = super_asker(lowerBound, 5000, "Enter an upper bound: ")
+    print(f"OK then, guess a number between {lowerBound} and {upperBound} ?")
+    actualNumber = random.randint(lowerBound, upperBound)
+
+    guessed = False
+
+    while not guessed:
+        guessedNumber = super_asker(
+            f"Guess a number between {upperBound} and {lowerBound}:"
+        )
+        print(f"You guessed {guessedNumber},")
+        if guessedNumber == actualNumber:
+            print(f"You got it!! It was {actualNumber}")
+            guessed = True
+        elif guessedNumber < actualNumber:
+            print("Too small, try again :'(")
+        else:
+            print("Too big, try again :'(")
+        if guessedNumber == super_asker(input):
+            print("its a number")
+        else:
+            print("not an integer")
     return "You got it!"
     # the tests are looking for the exact string "You got it!". Don't modify that!
 
