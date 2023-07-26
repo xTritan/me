@@ -14,12 +14,13 @@ def super_asker(low, high, message):
     """
 
     while True:
-        my_input = input(message)
+        my_input = int(input(message))
         try:
             val = int(my_input)
-            if low < val < high:
-                print("correct")
-                return val
+            if low <= my_input <= high:
+                return my_input
+            else:
+                print(f"Please enter a number between {low} and {high}.")
         except ValueError:
             print("incorrect try again:")
 
@@ -48,29 +49,23 @@ def advancedGuessingGame():
     """
 
     print("\nWelcome to the guessing game!")
-    lowerBound = super_asker(-5000, 5000, "Enter a lower bound: ")
-    upperBound = super_asker(lowerBound, 5000, "Enter an upper bound: ")
-    print(f"OK then, guess a number between {lowerBound} and {upperBound} ?")
-    actualNumber = random.randint(lowerBound, upperBound)
+    low = super_asker(-5000, 5000, "Enter a lower bound: ")
+    high = super_asker(low, 5000, "Enter an upper bound: ")
+    print(f"OK then, guess a number between {low} and {high} ?")
+    actualNumber = random.randint(low, high)
 
-    guessed = False
+    attempts = 0
+    while True:
+        guess = super_asker(low, high, "Enter your guess: ")
+        attempts += 1
 
-    while not guessed:
-        guessedNumber = super_asker(
-            f"Guess a number between {upperBound} and {lowerBound}:"
-        )
-        print(f"You guessed {guessedNumber},")
-        if guessedNumber == actualNumber:
-            print(f"You got it!! It was {actualNumber}")
-            guessed = True
-        elif guessedNumber < actualNumber:
-            print("Too small, try again :'(")
+        if guess < actualNumber:
+            print("Too low! Try again.")
+        elif guess > actualNumber:
+            print("Too high! Try again.")
         else:
-            print("Too big, try again :'(")
-        if guessedNumber == super_asker(input):
-            print("its a number")
-        else:
-            print("not an integer")
+            print(f"Congratulations! You guessed the number in {attempts} attempts.")
+            break
     return "You got it!"
     # the tests are looking for the exact string "You got it!". Don't modify that!
 
